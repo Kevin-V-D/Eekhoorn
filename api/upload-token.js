@@ -1,6 +1,11 @@
 import { handleUpload } from '@vercel/blob';
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+
   try {
     const body = req.body;
 
@@ -8,7 +13,6 @@ export default async function handler(req, res) {
       body,
       request: req,
       onBeforeGenerateToken: async (pathname) => {
-        // Hier staan welke bestandsstypes mogen (zowel foto's als video's!)
         return {
           allowedContentTypes: [
             'image/jpeg', 
@@ -28,6 +32,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json(jsonResponse);
   } catch (error) {
+    console.error('Fout in upload-token API:', error);
     return res.status(400).json({ error: error.message });
   }
 }
