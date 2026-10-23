@@ -2,17 +2,17 @@ body {
     overflow: hidden;
 }
 
-main {
-    width: 100%;
-}
-
 .loading {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 5vh;
-    width: 100%;
     min-height: calc(100vh - 50px);
     position: relative;
-    z-index: 2;
+}
+
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,3 +1,16 @@
+const uploadbtn = document.querySelector("#fileInput");
+
+uploadbtn.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        if (gekozenBestand) {
+        console.log("Gekozen bestand:", gekozenBestand.name);
+        console.log("Bestandstype:", gekozenBestand.type);
+        console.log("Grootte in bytes:", gekozenBestand.size);
+    }
+});
+
 window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("./api/check-auth", {
         method: "GET"
