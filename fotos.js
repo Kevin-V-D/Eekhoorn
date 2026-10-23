@@ -14,7 +14,7 @@ async function laadBestanden() {
 
             const isVideo = file.url.endsWith('.mp4') || file.url.endsWith('.webm');
             files.push({
-                url: file,
+                url: file.url,
                 type: isVideo ? 'video' : 'image'
             });
         });
