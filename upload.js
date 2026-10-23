@@ -1,12 +1,12 @@
 const uploadbtn = document.querySelector("#fileInput");
 
 uploadbtn.addEventListener("change", (event) => {
-    const file = event.target.files[0];
+    const chosenFile = event.target.files[0];
 
-    if (file) {
-        console.log("Gekozen bestand:", file.name);
-        console.log("Bestandstype:", file.type);
-        console.log("Grootte in bytes:", file.size);
+    if (chosenFile) {
+        console.log("Gekozen bestand:", chosenFile.name);
+        console.log("Bestandstype:", chosenFile.type);
+        console.log("Grootte in bytes:", chosenFile.size);
     }
 });
 
