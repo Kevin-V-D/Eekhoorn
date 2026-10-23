@@ -39,7 +39,7 @@ function renderFile() {
         fileCard.style.overflow = "hidden";
         fileCard.style.margin = "3%";
         fileCard.style.borderRadius = "3px";
-        fileCard.style.height = "15%";
+        fileCard.style.height = "20%";
 
         newFile.src = file.url;
         newFile.style.height = "100%";
