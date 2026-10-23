@@ -1,4 +1,4 @@
-const { put } = require('@vercel/blob');
+const { handleUpload } = require('@vercel/blob/client');
 
 module.exports = async function handler(request, response) {
   // CORS headers
@@ -16,17 +16,27 @@ module.exports = async function handler(request, response) {
   }
 
   try {
-    const filename = request.query.filename || 'upload';
-    
-    // Direct de Store ID meegeven zonder tokens of process.env
-    const blob = await put(filename, request, {
-      access: 'public',
-      storeId: 'store_iL7g0UdUfKv1mYV',
+    const body = request.body;
+
+    // Vercel's handleUpload regelt de beveiligde token-uitgifte aan je frontend
+    const jsonResponse = await handleUpload({
+      body,
+      request,
+      onBeforeGenerateToken: async (pathname) => {
+        // Hier kun je optioneel checken of de gebruiker is ingelogd
+        return {
+          allowedContentTypes: ['image/jpeg', 'image/png', 'application/pdf', 'text/plain'], // pas aan naar wens
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        };
+      },
+      onUploadCompleted: async ({ blob, token }) => {
+        console.log('Blob upload compleet:', blob.url);
+      },
     });
 
-    return response.status(200).json(blob);
+    return response.status(200).json(jsonResponse);
   } catch (error) {
-    console.error('Upload fout:', error);
-    return response.status(500).json({ error: error.message });
+    console.error('Handle upload fout:', error);
+    return response.status(400).json({ error: error.message });
   }
 };
