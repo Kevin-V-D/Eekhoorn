@@ -7,7 +7,9 @@ main {
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
+    width: 100%;
 }
 
 label {
@@ -16,10 +18,14 @@ label {
 
 input {
     height: 2vh;
-    width: 20vh;
+    width: 20vw;
+    max-width: 200px;
     font-size: 2vh;
 }
 
 .logIn {
     margin-top: 2vh;
+    height: 3vh;
+    width: 21vw;
+    max-width: 210px;
 }
