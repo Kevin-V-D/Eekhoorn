@@ -18,10 +18,13 @@ module.exports = async function handler(request, response) {
   try {
     const filename = request.query.filename || 'upload';
     
-    // Dwing de token hier direct af via process.env.BLOB_READ_WRITE_TOKEN
+    // We gebruiken nu de automatische OIDC token en de Store ID die je in je dashboard zag
     const blob = await put(filename, request, {
       access: 'public',
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Vercel geeft automatisch de oidcToken mee via deze omgevingsvariabele
+      oidcToken: process.env.VERCEL_OIDC_TOKEN,
+      // Vul hier jouw Store ID in (die je op de screenshot zag bij .env.local)
+      storeId: 'store_iL7g0UdUfKv1mYV', 
     });
 
     return response.status(200).json(blob);
