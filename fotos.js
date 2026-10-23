@@ -2,7 +2,7 @@ const imgContainer = document.querySelector('.img-container');
 
 const files = [];
 
-async function laadBestanden() {
+async function pullFiles() {
     try {
         const response = await fetch('/api/list-files');
         const blobs = await response.json();
@@ -17,6 +17,7 @@ async function laadBestanden() {
             });
         });
 
+        renderFile();
         console.log(files[0]);
 
     } catch (error) {
@@ -24,4 +25,22 @@ async function laadBestanden() {
     }
 }
 
-laadBestanden();
+function renderFile() {
+    files.forEach(file => {
+        let newFile;
+        if (file.type === 'image') {
+            newFile = document.createElement('img');
+        } else {
+            newFile = document.createElement('video');
+            newFile.controls = true;
+        }
+
+        newFile.src = file.url;
+        newFile.style.height = "100px";
+        newFile.style.width = "auto";
+
+        imgContainer.appendChild(newFile);
+    });
+}
+
+pullFiles();
