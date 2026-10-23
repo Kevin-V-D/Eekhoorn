@@ -18,10 +18,10 @@ module.exports = async function handler(request, response) {
   try {
     const filename = request.query.filename || 'upload';
     
-    // Plak hier tijdelijk je echte token die begint met vercel_blob_rw_...
+    // Dwing de token hier direct af via process.env.BLOB_READ_WRITE_TOKEN
     const blob = await put(filename, request, {
       access: 'public',
-      token: 'vercel_blob_rw_JOUW_ECHTE_TOKEN_HIER',
+      token: BLOB_READ_WRITE_TOKEN,
     });
 
     return response.status(200).json(blob);
