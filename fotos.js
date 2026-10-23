@@ -1,13 +1,29 @@
-const main = document.querySelector("main");
-const btn = document.querySelector(".upload");
+const imgContainer = document.querySelector('.img-container');
 
-btn.addEventListener("click", () => {
-    const test = document.createElement("div");
-    const img = document.createElement("img");
-    test.style.height = "100px";
-    img.src = "./pictures/main-background.jpeg";
-    img.style.height = "100%";
-    img.style.objectFit = "scale-down";
-    main.appendChild(test);
-    test.appendChild(img);
-});
+const files = [];
+
+async function laadBestanden() {
+    try {
+        const response = await fetch('/api/list-files');
+        const blobs = await response.json();
+
+        console.log("Alle bestanden in Blob:", blobs);
+
+        blobs.forEach(file => {
+            console.log(`Bestandsnaam: ${file.pathname}, URL: ${file.url}`);
+
+            const isVideo = recFile.url.endsWith('.mp4') || recFile.url.endsWith('.webm');
+            files.push({
+                url: file,
+                type: isVideo ? 'video' : 'image'
+            });
+        });
+
+    } catch (error) {
+        console.error("Kon bestanden niet ophalen:", error);
+    }
+}
+
+laadBestanden();
+
+console.log(files);
