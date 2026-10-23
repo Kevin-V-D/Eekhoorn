@@ -1,48 +1,32 @@
-const { handleUpload } = require('@vercel/blob');
+const { put } = require('@vercel/blob');
 
 module.exports = async function handler(request, response) {
   // CORS headers
   response.setHeader('Access-Control-Allow-Credentials', true);
   response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  response.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  response.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (request.method === 'OPTIONS') {
-    response.status(200).end();
-    return;
+    return response.status(200).end();
+  }
+
+  if (request.method !== 'POST') {
+    return response.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const body = request.body;
-
-    const jsonResponse = await handleUpload({
-      body,
-      request,
+    // Vang het bestand op uit de request
+    const filename = request.query.filename || 'upload';
+    
+    const blob = await put(filename, request, {
+      access: 'public',
       token: process.env.BLOB_READ_WRITE_TOKEN,
-      onBeforeGenerateToken: async (pathname) => {
-        return {
-          allowedContentTypes: [
-            'image/jpeg', 
-            'image/png', 
-            'image/webp', 
-            'image/gif', 
-            'video/mp4', 
-            'video/quicktime'
-          ],
-          tokenPayload: JSON.stringify({}),
-        };
-      },
-      onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.log('Upload voltooid:', blob.url);
-      },
     });
 
-    return response.status(200).json(jsonResponse);
+    return response.status(200).json(blob);
   } catch (error) {
-    console.error('BLOB SERVER ERROR:', error);
-    return response.status(400).json({ error: error.message });
+    console.error('Upload fout:', error);
+    return response.status(500).json({ error: error.message });
   }
 };
