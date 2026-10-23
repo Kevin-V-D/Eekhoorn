@@ -1,37 +1,13 @@
-const btn = document.querySelector(".logIn");
-const form = document.querySelector("form");
-const Username = document.querySelector("#Username");
-const Password = document.querySelector("#Password");
-let foutmelding;
-
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (foutmelding) {
-        foutmelding.remove();
-        foutmelding = null;
-    }
-
-    const response = await fetch("./api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: Username.value,
-            password: Password.value
-        })
+window.addEventListener("DOMContentLoaded", async () => {
+    const response = await fetch("./api/check-auth", {
+        method: "GET"
     });
 
     const data = await response.json();
 
-    if (data.success) {
-        console.log("Inloggen is gelukt!");
-        form.style.display = "none";
+    if (!data.success) {
+        window.location.href = "/index.html";
     } else {
-        foutmelding = document.createElement("p");
-        foutmelding.innerText = data.bericht;
-        foutmelding.style.wordBreak = "break-word";
-        form.prepend(foutmelding);
+        document.querySelector(".loading").style.display = "none";
     }
 });

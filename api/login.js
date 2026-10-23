@@ -5,6 +5,10 @@ export default function handler(req, res) {
     const password = process.env.PASSWORD;
 
     if (name === receivedName && password === receivedPassword) {
+        const token = "testtoken";
+
+        res.setHeader('Set-Cookie', `auth_token=${token}; HttpOnly; secure; SameSite=Strict; path=/; Max-age=3600`);
+
         return res.status(200).json({
             success: true
         });
