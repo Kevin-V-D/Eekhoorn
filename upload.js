@@ -1,38 +1,42 @@
-import { upload } from 'https://esm.sh/@vercel/blob/client';
+const { handleUpload } = require('@vercel/blob/client');
 
-const uploadbtn = document.querySelector("#fileInput");
+module.exports = async function handler(request, response) {
+  // CORS headers
+  response.setHeader('Access-Control-Allow-Credentials', true);
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-uploadbtn.addEventListener("change", async (event) => {
-    const chosenFile = event.target.files[0];
-    if (!chosenFile) return;
+  if (request.method === 'OPTIONS') {
+    return response.status(200).end();
+  }
 
-    try {
-        console.log("Bezig met uploaden van:", chosenFile.name);
+  if (request.method !== 'POST') {
+    return response.status(405).json({ error: 'Method not allowed' });
+  }
 
-        const newBlob = await upload(chosenFile.name, chosenFile, {
-            access: 'public',
-            handleUploadUrl: '/api/upload-token',
-        });
+  try {
+    const body = request.body;
 
-        console.log('Upload gelukt! De URL is:', newBlob.url);
-        alert('Bestand succesvol geüpload!');
-
-    } catch (error) {
-        console.error('Upload mislukt:', error);
-        alert('Er ging iets mis bij het uploaden.');
-    }
-});
-
-window.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetch("./api/check-auth", {
-        method: "GET"
+    // Vercel's handleUpload regelt de beveiligde token-uitgifte aan je frontend
+    const jsonResponse = await handleUpload({
+      body,
+      request,
+      onBeforeGenerateToken: async (pathname) => {
+        // Hier kun je optioneel checken of de gebruiker is ingelogd
+        return {
+          allowedContentTypes: ['image/jpeg', 'image/png', 'application/pdf', 'text/plain'], // pas aan naar wens
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        };
+      },
+      onUploadCompleted: async ({ blob, token }) => {
+        console.log('Blob upload compleet:', blob.url);
+      },
     });
 
-    const data = await response.json();
-
-    if (!data.success) {
-        window.location.href = "/index.html";
-    } else {
-        document.querySelector(".loading").style.display = "none";
-    }
-});
+    return response.status(200).json(jsonResponse);
+  } catch (error) {
+    console.error('Handle upload fout:', error);
+    return response.status(400).json({ error: error.message });
+  }
+};
