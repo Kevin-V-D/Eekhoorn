@@ -23,9 +23,16 @@ module.exports = async function handler(request, response) {
       body,
       request,
       onBeforeGenerateToken: async (pathname) => {
-        // Hier kun je optioneel checken of de gebruiker is ingelogd
         return {
-          allowedContentTypes: ['image/jpeg', 'image/png', 'application/pdf', 'text/plain'], // pas aan naar wens
+          allowedContentTypes: [
+            'image/jpeg', 
+            'image/png', 
+            'image/webp', 
+            'application/pdf', 
+            'text/plain', 
+            'video/mp4', 
+            'video/webm'
+          ],
           token: process.env.BLOB_READ_WRITE_TOKEN,
         };
       },
