@@ -28,6 +28,7 @@ async function pullFiles() {
 function renderFile() {
     files.forEach(file => {
         let newFile;
+        const fileCard = document.createElement('div');
         if (file.type === 'image') {
             newFile = document.createElement('img');
         } else {
@@ -36,10 +37,15 @@ function renderFile() {
         }
 
         newFile.src = file.url;
-        newFile.style.height = "100px";
+        newFile.style.height = "12%";
         newFile.style.width = "auto";
 
-        imgContainer.appendChild(newFile);
+        fileCard.style.overflow = "hidden";
+        fileCard.style.margin = "3%";
+        fileCard.style.borderRadius = "3px";
+
+        imgContainer.appendChild(fileCard);
+        fileCard.appendChild(newFile);
     });
 }
 
