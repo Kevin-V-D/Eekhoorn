@@ -1,4 +1,4 @@
-import { handleUpload } from '@vercel/blob';
+import vercelBlob from '@vercel/blob';
 
 export default async function handler(request, response) {
   // CORS headers
@@ -18,10 +18,9 @@ export default async function handler(request, response) {
   try {
     const body = request.body;
 
-    const jsonResponse = await handleUpload({
+    const jsonResponse = await vercelBlob.handleUpload({
       body,
       request,
-      // We geven de token hier handmatig mee om te zorgen dat hij hem direct pakt uit je environment variables
       token: process.env.BLOB_READ_WRITE_TOKEN,
       onBeforeGenerateToken: async (pathname) => {
         return {
@@ -44,7 +43,6 @@ export default async function handler(request, response) {
     return response.status(200).json(jsonResponse);
   } catch (error) {
     console.error('BLOB SERVER ERROR:', error);
-    // Dit stuurt de exacte technische fout door naar je browser console zodat we het meteen zien
     return response.status(400).json({ error: error.message });
   }
 }
