@@ -23,8 +23,8 @@ module.exports = async function handler(request, response) {
     const filename = request.query.filename || 'upload';
     
     const blob = await put(filename, request, {
-      access,
-      token
+      token,
+      access
     });
 
     return response.status(200).json(blob);
