@@ -4,7 +4,7 @@ const uploadbtn = document.querySelector("#fileInput");
 
 uploadbtn.addEventListener("change", async (event) => {
     const chosenFile = event.target.files[0];
-    if (!file) return;
+    if (!chosenFile) return;
 
     try {
         console.log("Bezig met uploaden van:", chosenFile.name);
