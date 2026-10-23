@@ -17,11 +17,11 @@ async function laadBestanden() {
             });
         });
 
+        console.log(files[0]);
+
     } catch (error) {
         console.error("Kon bestanden niet ophalen:", error);
     }
 }
 
 laadBestanden();
-
-console.log(files[0]);
