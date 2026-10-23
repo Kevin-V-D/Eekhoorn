@@ -1,8 +1,5 @@
 const { put } = require('@vercel/blob');
 
-const token = process.env.BLOB_READ_WRITE_TOKEN;
-const access = 'public';
-
 module.exports = async function handler(request, response) {
   // CORS headers
   response.setHeader('Access-Control-Allow-Credentials', true);
@@ -19,18 +16,17 @@ module.exports = async function handler(request, response) {
   }
 
   try {
-    // Vang het bestand op uit de request
     const filename = request.query.filename || 'upload';
     
+    // Direct de Store ID meegeven zonder tokens of process.env
     const blob = await put(filename, request, {
-      token,
-      access
+      access: 'public',
+      storeId: 'store_iL7g0UdUfKv1mYV',
     });
 
     return response.status(200).json(blob);
   } catch (error) {
     console.error('Upload fout:', error);
-    console.error(token);
     return response.status(500).json({ error: error.message });
   }
 };
