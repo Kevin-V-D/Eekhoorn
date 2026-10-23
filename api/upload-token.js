@@ -18,12 +18,13 @@ module.exports = async function handler(request, response) {
   try {
     // Vang het bestand op uit de request
     const filename = request.query.filename || 'upload';
+    console.log(token);
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
     
     const blob = await put(filename, request, {
       access: 'public',
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      token: token,
     });
-    console.log(process.env.BLOB_READ_WRITE_TOKEN);
 
     return response.status(200).json(blob);
   } catch (error) {
