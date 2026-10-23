@@ -20,7 +20,10 @@ form.addEventListener("submit", async (e) => {
 
     if (data.success) {
         console.log("Inloggen is gelukt!");
+        form.style.display = "none";
     } else {
-        console.log("Fout: ", data.bericht);
+        const p = document.createElement("p");
+        p.innerText = data.bericht;
+        form.prepend(p);
     }
 });
