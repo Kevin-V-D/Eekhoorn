@@ -24,7 +24,7 @@ form.addEventListener("submit", async (e) => {
     } else {
         const foutmelding = document.createElement("p");
         foutmelding.innerText = data.bericht;
-        foutmelding.style
+        foutmelding.style.wordBreak = "break-word";
         form.prepend(foutmelding);
     }
 });
