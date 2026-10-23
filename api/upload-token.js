@@ -1,6 +1,7 @@
 const { put } = require('@vercel/blob');
 
 const token = process.env.BLOB_READ_WRITE_TOKEN;
+const access = 'public';
 
 module.exports = async function handler(request, response) {
   // CORS headers
@@ -22,6 +23,7 @@ module.exports = async function handler(request, response) {
     const filename = request.query.filename || 'upload';
     
     const blob = await put(filename, request, {
+      access,
       token
     });
 
