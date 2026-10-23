@@ -10,8 +10,6 @@ async function laadBestanden() {
         console.log("Alle bestanden in Blob:", blobs);
 
         blobs.forEach(file => {
-            console.log(`Bestandsnaam: ${file.pathname}, URL: ${file.url}`);
-
             const isVideo = file.url.endsWith('.mp4') || file.url.endsWith('.webm');
             files.push({
                 url: file.url,
@@ -26,4 +24,4 @@ async function laadBestanden() {
 
 laadBestanden();
 
-console.log(files);
+console.log(files[0]);
