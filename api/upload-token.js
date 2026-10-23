@@ -1,6 +1,6 @@
-import vercelBlob from '@vercel/blob';
+const { handleUpload } = require('@vercel/blob');
 
-export default async function handler(request, response) {
+module.exports = async function handler(request, response) {
   // CORS headers
   response.setHeader('Access-Control-Allow-Credentials', true);
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,7 +18,7 @@ export default async function handler(request, response) {
   try {
     const body = request.body;
 
-    const jsonResponse = await vercelBlob.handleUpload({
+    const jsonResponse = await handleUpload({
       body,
       request,
       token: process.env.BLOB_READ_WRITE_TOKEN,
@@ -45,4 +45,4 @@ export default async function handler(request, response) {
     console.error('BLOB SERVER ERROR:', error);
     return response.status(400).json({ error: error.message });
   }
-}
+};
