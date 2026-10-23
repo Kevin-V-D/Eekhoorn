@@ -21,7 +21,7 @@ module.exports = async function handler(request, response) {
     // Dwing de token hier direct af via process.env.BLOB_READ_WRITE_TOKEN
     const blob = await put(filename, request, {
       access: 'public',
-      token: process.env.BLOB_WEBHOOK_PUBLIC_KEY,
+      token: '-----BEGIN PUBLIC KEY-----MCowBQYDK2VwAyEAhgK0YWmZqC40ZHoCUrk1KyNlIJjbUatr7g/yZ18FySo=-----END PUBLIC KEY-----',
     });
 
     return response.status(200).json(blob);
