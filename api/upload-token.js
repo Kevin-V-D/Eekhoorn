@@ -16,9 +16,9 @@ module.exports = async function handler(request, response) {
   }
 
   try {
-    // Vang het bestand op uit de request
     const filename = request.query.filename || 'upload';
     
+    // Dwing de token hier direct af via process.env.BLOB_READ_WRITE_TOKEN
     const blob = await put(filename, request, {
       access: 'public',
       token: process.env.BLOB_READ_WRITE_TOKEN,
