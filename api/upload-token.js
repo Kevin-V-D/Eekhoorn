@@ -1,7 +1,7 @@
 import { handleUpload } from '@vercel/blob';
 
 export default async function handler(request, response) {
-  // Zet CORS headers zodat je browser nooit wordt geblokkeerd
+  // CORS headers
   response.setHeader('Access-Control-Allow-Credentials', true);
   response.setHeader('Access-Control-Allow-Origin', '*');
   response.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -21,6 +21,8 @@ export default async function handler(request, response) {
     const jsonResponse = await handleUpload({
       body,
       request,
+      // We geven de token hier handmatig mee om te zorgen dat hij hem direct pakt uit je environment variables
+      token: process.env.BLOB_READ_WRITE_TOKEN,
       onBeforeGenerateToken: async (pathname) => {
         return {
           allowedContentTypes: [
@@ -41,7 +43,8 @@ export default async function handler(request, response) {
 
     return response.status(200).json(jsonResponse);
   } catch (error) {
-    console.error('CRITICAL UPLOAD ERROR:', error);
+    console.error('BLOB SERVER ERROR:', error);
+    // Dit stuurt de exacte technische fout door naar je browser console zodat we het meteen zien
     return response.status(400).json({ error: error.message });
   }
 }
