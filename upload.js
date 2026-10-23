@@ -2,7 +2,6 @@ const btn = document.querySelector(".logIn");
 const form = document.querySelector("form");
 const Username = document.querySelector("#Username");
 const Password = document.querySelector("#Password");
-let foutmelding = null;
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -22,10 +21,10 @@ form.addEventListener("submit", async (e) => {
     if (data.success) {
         console.log("Inloggen is gelukt!");
         form.style.display = "none";
-        if (foutmelding) foutmelding.remove();
     } else {
-        foutmelding = document.createElement("p");
+        const foutmelding = document.createElement("p");
         foutmelding.innerText = data.bericht;
-        form.insertBefore(foutmelding);
+        foutmelding.style
+        form.prepend(foutmelding);
     }
 });
