@@ -16,13 +16,14 @@ module.exports = async function handler(request, response) {
   }
 
   try {
+    // Vang het bestand op uit de request
     const filename = request.query.filename || 'upload';
     
-    // Dwing de token hier direct af via process.env.BLOB_READ_WRITE_TOKEN
     const blob = await put(filename, request, {
       access: 'public',
-      token: '-----BEGIN PUBLIC KEY-----MCowBQYDK2VwAyEAhgK0YWmZqC40ZHoCUrk1KyNlIJjbUatr7g/yZ18FySo=-----END PUBLIC KEY-----',
+      token: process.env.BLOB_READ_WRITE_TOKEN,
     });
+    console.log(process.env.BLOB_READ_WRITE_TOKEN);
 
     return response.status(200).json(blob);
   } catch (error) {
