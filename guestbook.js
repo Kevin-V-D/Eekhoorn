@@ -6,7 +6,7 @@ let guestbook = [];
 
 async function pullMessages() {
     try {
-        const response = await fetch('/api/guestbook', {
+        const response = await fetch('/api/database', {
             method: 'GET',
         });
 
