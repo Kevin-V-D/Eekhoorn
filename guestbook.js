@@ -12,7 +12,7 @@ async function pullMessages() {
 
         if (response.ok) {
             console.log("data:", data)
-            guestbook = data;
+            guestbook = await data;
         } else {
             console.log("error:", data.error);
         }
