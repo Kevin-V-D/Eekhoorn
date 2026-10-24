@@ -41,13 +41,14 @@ function renderFile() {
         }
 
         newFile.src = file.url;
-        newFile.style.height = "90%";
+        newFile.style.height = "120px";
         newFile.style.width = "auto";
 
         // Maak een delete-knop
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "Verwijderen";
         deleteBtn.style.display = "block";
+        deleteBtn.style.marginTop = "5px";
 
         // Als er op de knop geklikt wordt:
         deleteBtn.addEventListener('click', async () => {
@@ -76,7 +77,7 @@ function renderFile() {
         });
 
         fileCard.style.overflow = "hidden";
-        fileCard.style.marginTop = "3%";
+        fileCard.style.margin = "3%";
         fileCard.style.borderRadius = "3px";
         fileCard.style.height = "30%";
         fileCard.style.width = "min-content";
