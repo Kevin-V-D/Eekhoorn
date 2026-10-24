@@ -27,6 +27,7 @@ nav div:last-child {
     margin: 0;
     list-style: none;
     gap: 1%;
+    z-index: 2;
 }
 
 #navButtons li {
@@ -61,4 +62,51 @@ nav div:last-child {
 #kleurLogo {
     color: orange;
     font-size: 120%;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav div:last-child {
+        height: auto;
+        width: auto;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: black;
+    }
+
+    #navButtons {
+        display: none;
+        flex-direction: column-reverse;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border-bottom: solid gray 1px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        z-index: 2;
+    }
+
+    #navButtons.active {
+        display: flex;
+    }
+    
+    #navButtons li {
+        width: 100%;
+        height: 50px;
+    }
 }

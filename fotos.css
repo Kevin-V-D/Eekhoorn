@@ -10,6 +10,8 @@ main {
 }
 
 .img-container {
+    display: flex;
+    justify-content: space-evenly;
     height: 70vh;
     width: 70vw;
     max-width: 900px;
