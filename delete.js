@@ -48,7 +48,6 @@ function renderFile() {
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "Verwijderen";
         deleteBtn.style.display = "block";
-        deleteBtn.style.marginTop = "0";
 
         // Als er op de knop geklikt wordt:
         deleteBtn.addEventListener('click', async () => {
@@ -77,7 +76,6 @@ function renderFile() {
         });
 
         fileCard.style.overflow = "hidden";
-        fileCard.style.margin = "3%";
         fileCard.style.borderRadius = "3px";
         fileCard.style.height = "30%";
         fileCard.style.width = "min-content";
