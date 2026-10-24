@@ -24,12 +24,12 @@ async function pullMessages() {
 pullMessages();
 
 guestbook.forEach(post => {
-    name = createElement("p");
-    message = createElement("p");
+    const postName = createElement("p");
+    const postMessage = createElement("p");
 
-    name.innerText = post.name;
-    message.innerText = post.message;
+    postName.innerText = post.name;
+    postMessage.innerText = post.message;
 
-    document.body.appendChild(name);
-    document.body.appendChild(message);
+    document.body.appendChild(postName);
+    document.body.appendChild(postMessage);
 });
