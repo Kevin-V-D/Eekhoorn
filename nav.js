@@ -1,6 +1,6 @@
 const menu = document.querySelector(".menu-toggle");
 const navBar = document.querySelector("#navButtons");
-const logo = document.querySelector("#logo a");
+const logo = document.querySelector("#logo button");
 
 menu.addEventListener("click", () => {
     navBar.classList.toggle("active");
@@ -21,6 +21,7 @@ function cancelPress() {
     if (pressTimer !== null) {
         clearInterval(pressTimer);
         pressTimer = null;
+        window.location.href = "index.html";
     }
 }
 

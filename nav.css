@@ -53,14 +53,12 @@ nav div:last-child {
     margin-left: 1%;
 }
 
-#logo a {
+#logo button {
     color: orangered;
     font-size: 24px;
     text-decoration: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
+    border: none;
+    background-color: inherit;
 }
 
 #kleurLogo {
