@@ -24,16 +24,20 @@ async function pullMessages() {
 function createCard(data) {
     data.forEach(post => {
         const card = document.createElement("div");
+        const userDiv = document.createElement("div");
+        const commentDiv = document.createElement("div");
         const postName = document.createElement("p");
         const postMessage = document.createElement("p");
 
         card.className = "post";
-        postName.innerText = post.name;
-        postMessage.innerText = post.message;
+        postName.innerText = "Naam:", post.name;
+        postMessage.innerText = "Bericht:", post.message;
 
         main.appendChild(card);
-        card.appendChild(postName);
-        card.appendChild(postMessage);
+        card.appendChild(userDiv);
+        card.appendChild(commentDiv);
+        userDiv.appendChild(postName);
+        commentDiv.appendChild(postMessage)
     });
 }
 
