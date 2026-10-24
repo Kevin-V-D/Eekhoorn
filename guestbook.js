@@ -12,7 +12,7 @@ async function pullMessages() {
 
         if (response.ok) {
             console.log("data:", data)
-            
+            createCard(data);
         } else {
             console.log("error:", data.error);
         }
@@ -21,7 +21,7 @@ async function pullMessages() {
     }
 }
 
-function createCard(post) {
+function createCard(data) {
     data.forEach(post => {
         const card = document.createElement("div");
         const postName = document.createElement("p");
