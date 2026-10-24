@@ -77,7 +77,7 @@ function renderFile() {
         });
 
         fileCard.style.overflow = "hidden";
-        fileCard.style.margin = "3%";
+        fileCard.style.marginTop = "3%";
         fileCard.style.borderRadius = "3px";
         fileCard.style.height = "30%";
         fileCard.style.width = "min-content";
