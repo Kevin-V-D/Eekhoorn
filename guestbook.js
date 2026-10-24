@@ -1,5 +1,3 @@
-import { createElement } from "react";
-
 const name = document.querySelector("#name");
 const message = document.querySelector("#message");
 let guestbook = [];
