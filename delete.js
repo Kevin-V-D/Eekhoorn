@@ -48,6 +48,7 @@ function renderFile() {
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "Verwijderen";
         deleteBtn.style.display = "block";
+        deleteBtn.style.marginTop = "0";
 
         // Als er op de knop geklikt wordt:
         deleteBtn.addEventListener('click', async () => {
