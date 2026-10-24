@@ -31,8 +31,9 @@ function createCard(post) {
         postName.innerText = post.name;
         postMessage.innerText = post.message;
 
-        main.appendChild(postName);
-        main.appendChild(postMessage);
+        main.appendChild(card);
+        card.appendChild(postName);
+        card.appendChild(postMessage);
     });
 }
 
