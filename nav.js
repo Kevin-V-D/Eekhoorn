@@ -13,7 +13,7 @@ function startPress(e) {
     pressTimer = setTimeout(() => {
         e.preventDefault();
         console.log("long pressed");
-        window.location.href = "login.html"
+        window.location.href = "upload.html"
     }, longPress);
 }
 
@@ -21,7 +21,7 @@ function cancelPress() {
     if (pressTimer !== null) {
         clearInterval(pressTimer);
         pressTimer = null;
-        window.location.href = "upload.html";
+        window.location.href = "index.html";
     }
 }
 
