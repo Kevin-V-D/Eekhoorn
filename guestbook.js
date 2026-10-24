@@ -1,7 +1,6 @@
 const main = document.querySelector("main");
 const name = document.querySelector("#name");
 const message = document.querySelector("#message");
-let guestbook = [];
 
 async function pullMessages() {
     try {
@@ -13,7 +12,16 @@ async function pullMessages() {
 
         if (response.ok) {
             console.log("data:", data)
-            guestbook = await data;
+            data.forEach(post => {
+                const postName = document.createElement("p");
+                const postMessage = document.createElement("p");
+
+                postName.innerText = post.name;
+                postMessage.innerText = post.message;
+
+                main.appendChild(postName);
+                main.appendChild(postMessage);
+            });
         } else {
             console.log("error:", data.error);
         }
@@ -23,14 +31,3 @@ async function pullMessages() {
 }
 
 pullMessages();
-
-guestbook.forEach(post => {
-    const postName = createElement("p");
-    const postMessage = createElement("p");
-
-    postName.innerText = post.name;
-    postMessage.innerText = post.message;
-
-    main.appendChild(postName);
-    main.appendChild(postMessage);
-});
