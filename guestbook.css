@@ -29,4 +29,10 @@ form div {
 
 .post div {
     flex: 1;
+    padding: 5px;
+}
+
+.user {
+    display: flex;
+    align-content: center;
 }
