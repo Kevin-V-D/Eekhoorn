@@ -61,6 +61,10 @@ nav div:last-child {
     background-color: inherit;
 }
 
+#logo button:hover {
+    cursor: pointer;
+}
+
 #kleurLogo {
     color: orange;
     font-size: 120%;
