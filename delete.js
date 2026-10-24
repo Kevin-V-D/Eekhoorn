@@ -77,7 +77,10 @@ function renderFile() {
         });
 
         fileCard.style.overflow = "hidden";
-        fileCard.style.margin = "10px";
+        fileCard.style.margin = "3%";
+        fileCard.style.borderRadius = "3px";
+        fileCard.style.height = "30%";
+        fileCard.style.width = "min-content";
         fileCard.style.display = "inline-block";
 
         fileCard.appendChild(newFile);
