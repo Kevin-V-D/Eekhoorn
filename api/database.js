@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
       // Echte SQL-query om data toe te voegen (veilig tegen SQL-injectie door ${...})
       await sql`
-        INSERT INTO gastenboek (name, message) 
+        INSERT INTO guestbook (name, message) 
         VALUES (${name}, ${message});
       `;
 
