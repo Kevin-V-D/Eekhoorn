@@ -1,5 +1,33 @@
+const imgContainer = document.querySelector('.img-container');
+let files = []; // Maak de array aan
+
+async function pullFiles() {
+    try {
+        const response = await fetch('/api/list-files');
+        const blobs = await response.json();
+
+        // Leeg de array eerst zodat je geen dubbele items krijgt bij een refresh
+        files = [];
+
+        blobs.forEach(file => {
+            const isVideo = file.url.endsWith('.mp4') || file.url.endsWith('.webm');
+            files.push({
+                name: file.pathname, // Belangrijk voor je delete alert!
+                url: file.url,
+                type: isVideo ? 'video' : 'image'
+            });
+        });
+
+        // Nu de data binnen is, roepen we pas de render-functie aan!
+        renderFile();
+
+    } catch (error) {
+        console.error("Kon bestanden niet ophalen:", error);
+    }
+}
+
 function renderFile() {
-    imgContainer.innerHTML = ''; // Maak leeg om dubbels te voorkomen
+    imgContainer.innerHTML = ''; // Maak de container leeg
 
     files.forEach(file => {
         let newFile;
@@ -32,7 +60,6 @@ function renderFile() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    // We sturen de URL mee zodat de server weet welke blob weg moet
                     body: JSON.stringify({ url: file.url }) 
                 });
 
@@ -54,7 +81,10 @@ function renderFile() {
         fileCard.style.display = "inline-block";
 
         fileCard.appendChild(newFile);
-        fileCard.appendChild(deleteBtn); // Voeg de knop toe aan de kaart
+        fileCard.appendChild(deleteBtn);
         imgContainer.appendChild(fileCard);
     });
 }
+
+// 🚀 HIER START ALLES: Roep de functie aan zodra de pagina laadt
+pullFiles();
