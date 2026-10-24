@@ -1,3 +1,4 @@
+const main = document.querySelector("main");
 const name = document.querySelector("#name");
 const message = document.querySelector("#message");
 let guestbook = [];
@@ -30,6 +31,6 @@ guestbook.forEach(post => {
     postName.innerText = post.name;
     postMessage.innerText = post.message;
 
-    document.body.appendChild(postName);
-    document.body.appendChild(postMessage);
+    main.appendChild(postName);
+    main.appendChild(postMessage);
 });
