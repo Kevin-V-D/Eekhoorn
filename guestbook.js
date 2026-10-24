@@ -20,6 +20,4 @@ async function pullMessages() {
     }
 }
 
-const test = await pullMessages();
-
-console.log(test);
+pullMessages();
