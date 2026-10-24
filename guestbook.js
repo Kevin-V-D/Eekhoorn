@@ -23,7 +23,7 @@ async function pullMessages() {
 
 pullMessages();
 
-data.forEach(post => {
+guestbook.forEach(post => {
     name = createElement("p");
     message = createElement("p");
 
