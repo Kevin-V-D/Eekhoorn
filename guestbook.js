@@ -12,22 +12,28 @@ async function pullMessages() {
 
         if (response.ok) {
             console.log("data:", data)
-            data.forEach(post => {
-                const postName = document.createElement("p");
-                const postMessage = document.createElement("p");
-
-                postName.innerText = post.name;
-                postMessage.innerText = post.message;
-
-                main.appendChild(postName);
-                main.appendChild(postMessage);
-            });
+            
         } else {
             console.log("error:", data.error);
         }
     } catch (error) {
         console.error('Netwerkfout:', error);
     }
+}
+
+function createCard(post) {
+    data.forEach(post => {
+        const card = document.createElement("div");
+        const postName = document.createElement("p");
+        const postMessage = document.createElement("p");
+
+        card.className = "post";
+        postName.innerText = post.name;
+        postMessage.innerText = post.message;
+
+        main.appendChild(postName);
+        main.appendChild(postMessage);
+    });
 }
 
 pullMessages();
