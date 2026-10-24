@@ -30,8 +30,8 @@ function createCard(data) {
         const postMessage = document.createElement("p");
 
         card.className = "post";
-        postName.innerText = `Naam: ${post.name}`;
-        postMessage.innerText = `Bericht: ${post.message}`;
+        postName.innerText = `Naam:\n${post.name}`;
+        postMessage.innerText = `Bericht:\n${post.message}`;
 
         main.appendChild(card);
         card.appendChild(userDiv);
