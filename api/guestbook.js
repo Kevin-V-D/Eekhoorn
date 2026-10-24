@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       // Echte SQL-query om alle berichten op te halen, nieuwste bovenaan
       const berichten = await sql`
         SELECT id, name, message, created_at 
-        FROM gastenboek 
+        FROM guestbook 
         ORDER BY created_at DESC;
       `;
       
