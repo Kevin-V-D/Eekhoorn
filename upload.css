@@ -5,6 +5,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .loading {
@@ -13,7 +14,9 @@ main {
     align-items: center;
     font-size: 5vh;
     min-height: calc(100vh - 50px);
-    position: relative;
+    position: absolute;
+    background-color: white;
+    width: 100%;
 }
 
 .upload-container {
