@@ -41,7 +41,7 @@ function renderFile() {
         }
 
         newFile.src = file.url;
-        newFile.style.height = "auto";
+        newFile.style.height = "90%";
         newFile.style.width = "auto";
 
         // Maak een delete-knop
