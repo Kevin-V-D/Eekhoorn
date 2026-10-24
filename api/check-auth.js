@@ -1,6 +1,6 @@
 export default function handler(req, res) {
     const cookieHeader = req.headers.cookie || "";
-    const hasAccess = cookieHeader.includes("auth_token=testtoken");
+    const hasAccess = cookieHeader.includes(`auth_token=${process.env.AUTH_TOKEN}`);
 
     if (!hasAccess) {
         return res.status(401).json({
