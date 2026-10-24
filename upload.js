@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
 
     if (!data.success) {
-        window.location.href = "/index.html";
+        window.location.href = "login.html";
     } else {
         document.querySelector(".loading").style.display = "none";
     }

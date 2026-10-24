@@ -21,7 +21,7 @@ function cancelPress() {
     if (pressTimer !== null) {
         clearInterval(pressTimer);
         pressTimer = null;
-        window.location.href = "index.html";
+        window.location.href = "upload.html";
     }
 }
 
