@@ -1,4 +1,4 @@
-const main = document.querySelector("main");
+const posts = document.querySelector(".posts");
 const naam = document.querySelector("#name");
 const bericht = document.querySelector("#message");
 const btn = document.querySelector(".button");
@@ -39,6 +39,9 @@ async function postMessage() {
 
         if (response.ok) {
             console.log("data:", data);
+            naam.value = "";
+            bericht.value = "";
+            posts.innerHTML = "";
         } else {
             console.log("error:", data.error);
         }
@@ -60,7 +63,7 @@ function createCard(data) {
         postName.innerText = `Naam:\n${post.name}`;
         postMessage.innerText = `Bericht:\n${post.message}`;
 
-        main.appendChild(card);
+        posts.appendChild(card);
         card.appendChild(userDiv);
         card.appendChild(commentDiv);
         userDiv.appendChild(postName);
@@ -74,14 +77,14 @@ btn.addEventListener("click", () => {
     if (!naam) {
         p = document.createElement("p");
         p.innerText = "Je moet een naam invullen";
-        main.prepend(p);
+        posts.prepend(p);
         return;
     }
 
     if (!bericht) {
         p = document.createElement("p");
         p.innerText = "Je moet een bericht invullen";
-        main.prepend(p);
+        posts.prepend(p);
         return;
     }
 
