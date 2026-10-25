@@ -42,6 +42,7 @@ async function postMessage() {
             naam.value = "";
             bericht.value = "";
             posts.innerHTML = "";
+            pullMessages();
         } else {
             console.log("error:", data.error);
         }
