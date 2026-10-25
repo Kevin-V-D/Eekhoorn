@@ -1,6 +1,7 @@
 import { upload } from 'https://esm.sh/@vercel/blob/client';
 
 const uploadbtn = document.querySelector("#fileInput");
+const imgContainer = document.querySelector(".imgContainer");
 
 uploadbtn.addEventListener("change", async (event) => {
     const chosenFile = event.target.files[0];
@@ -16,6 +17,8 @@ uploadbtn.addEventListener("change", async (event) => {
 
         console.log('Upload gelukt! De URL is:', newBlob.url);
         alert('Bestand succesvol geüpload!');
+        imgContainer.innerHTML = "";
+        pullFiles();
 
     } catch (error) {
         console.error('Upload mislukt:', error);
