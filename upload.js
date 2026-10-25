@@ -17,7 +17,6 @@ uploadbtn.addEventListener("change", async (event) => {
 
         console.log('Upload gelukt! De URL is:', newBlob.url);
         alert('Bestand succesvol geüpload!');
-        imgContainer.innerHTML = "";
         pullFiles();
 
     } catch (error) {
